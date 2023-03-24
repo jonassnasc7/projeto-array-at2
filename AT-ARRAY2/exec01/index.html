@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>EXEC - 1</title>
+</head>
+<body>
+    <header class="titulo-principal">
+        Programa Situação de turma
+    </header>
+    <hr class="linha">
+
+    <main class="main">
+        <label for="nome">Nome do Aluno:
+	        <input type="text" id="nome" name="nome">
+        </label>
+    </main>
+
+    <main class="main2">
+        <label for="nota1">Nota 1:
+	        <input type="number" id="nota1" name="nota1" min="0" max="10">
+        </label>
+    </main>
+
+    <main class="main3">
+	    <label for="nota2">Nota 2:
+	        <input type="number" id="nota2" name="nota2" min="0" max="10">
+	    <section id="mediaTurma"></section>
+        </label>
+    </main>
+
+
+    <button class="button2" onclick="exibirMediaTurma()">Exibir média da Turma</button>
+	    <section id="resultado"></section>
+    <button class="button1" onclick="calcularMedia()">Exibir média do Aluno</button>
+
+	
+
+	<script>
+		let nTurma = [];
+
+		function calcularMedia() {
+			const nome = document.getElementById("nome").value;
+			const nota1 = parseFloat(document.getElementById("nota1").value);
+			const nota2 = parseFloat(document.getElementById("nota2").value);
+			const media = (nota1 + nota2) / 2;  
+
+			let mensagem = "";
+
+			if (media >= 7) {
+                mensagem = `Sua média foi:`
+                document.getElementById("calcularMedia")
+				mensagem = `PARABÉNS ${nome}! VOCÊ FOI APROVADO. MERECE O MUNDO!`;
+				document.getElementById("resultado").classList.add("aprovado");
+			} else if (media >= 3) {
+				mensagem = `ATENÇÃO ${nome}, VOCÊ ESTÁ EM RECUPERAÇÃO. ESTUDAR NÉ?!`;
+				document.getElementById("resultado").classList.add("recuperacao");
+			} else {
+				mensagem = `OPS ${nome}, VOCÊ FOI REPROVADO.`;  
+				document.getElementById("resultado").classList.add("reprovado");
+			}
+
+			document.getElementById("resultado").textContent = mensagem;
+
+			nTurma.push(media);
+		}
+
+		function exibirMediaTurma() {
+			const notaTotal = nTurma.length;
+			const somaNotas = nTurma.reduce((acumulador, nota) => acumulador + nota, 0);
+			const mediaTurma = somaNotas / notaTotal;
+
+			document.getElementById("mediaTurma").textContent = `Média da turma: ${mediaTurma}`;
+		}
+	</script>
+    
+</body>
+</html>
+
+
